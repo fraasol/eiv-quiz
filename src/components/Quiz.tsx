@@ -77,10 +77,12 @@ export default function Quiz({
           <span className="q-counter">{index + 1} / {total}</span>
           <span className="q-id">#{question.id}</span>
         </div>
+      {mode === 'study' && (
         <div className="score-display">
           <span className="score-label">Punteggio</span>
           <span className="score-value">{score.toFixed(1)}<span className="score-max">/{MAX_SCORE}</span></span>
         </div>
+      )}
         <button className="stop-btn" onClick={() => setConfirmStop(true)} title="Interrompi">✕</button>
       </div>
 
