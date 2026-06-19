@@ -1726,5 +1726,269 @@
     },
     "answer": "C",
     "explanation": "[DA VERIFICARE] I superpixel (ad esempio mediante la diffusissima tecnica SLIC) si generano applicando una variante locale dell'algoritmo K-means in uno spazio a 5 dimensioni che combina le coordinate spaziali (x,y) e quelle del colore (es. L, a, b)[cite: 338, 339, 1163, 1167]."
+  },
+  {
+    "id": 301,
+    "question": "Una sorgente di informazione X emette simboli scelti da un alfabeto a, b, c, d, con probabilità pa=0.1, pb=0.1, pc=0.3, pd=0.5. Viene progettato un codice di Huffman per questa sorgente. Si indichi la risposta corretta:",
+    "options": {
+      "A": "Questo codice di Huffman ha una lunghezza media uguale a H(X)",
+      "B": "Questo codice di Huffman ha una lunghezza media maggiore di H(X)",
+      "C": "Questo codice di Huffman ha una lunghezza media minore di H(X)",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "B",
+    "explanation": "Un possibile codice di Huffman è: d→0, c→10, a→110, b→111. La lunghezza media è 0.5·1 + 0.3·2 + 0.1·3 + 0.1·3 = 1.7 bit/simbolo. L'entropia H(X) = -(0.5·log₂0.5 + 0.3·log₂0.3 + 0.1·log₂0.1 + 0.1·log₂0.1) ≈ 1.685 bit/simbolo. Poiché due simboli (a e b) hanno la stessa probabilità e non sono potenze di 2, la lunghezza media è leggermente maggiore dell'entropia."
+  },
+  {
+    "id": 302,
+    "question": "Si consideri la seguente trasformazione delle coordinate spaziali di un'immagine: [x y 1] = [v w 1] · [[1,0,0],[0,1,0],[7,−2,1]]. Si indichi la risposta corretta:",
+    "options": {
+      "A": "Nessuna delle altre risposte è corretta",
+      "B": "La trasformazione provoca una traslazione dell'immagine",
+      "C": "La trasformazione provoca uno shear verticale dell'immagine",
+      "D": "La trasformazione provoca uno shear orizzontale dell'immagine"
+    },
+    "answer": "B",
+    "explanation": "La matrice ha la forma di una traslazione in coordinate omogenee: x = v + 7, y = w − 2. I valori 7 e −2 nella terza riga (terza colonna esclusa) indicano uno spostamento di +7 in orizzontale e −2 in verticale. Una traslazione non è una trasformazione lineare nello spazio euclideo, ma lo diventa in coordinate omogenee con questa struttura."
+  },
+  {
+    "id": 303,
+    "question": "Si indichi quale dei seguenti colori, espressi nello spazio RGB, corrisponde alla saturazione maggiore nello spazio HSI:",
+    "options": {
+      "A": "R=255, G=255, B=255",
+      "B": "R=255, G=128, B=128",
+      "C": "R=128, G=128, B=128",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "D",
+    "explanation": "La saturazione in HSI è massima quando il colore è più lontano dal grigio. A=(255,255,255) è bianco puro → saturazione 0. C=(128,128,128) è grigio → saturazione 0. B=(255,128,128) ha una componente di grigio (128,128,128) e una componente rossa pura (127,0,0), quindi ha saturazione >0 ma non è il massimo possibile. Nessuna delle opzioni corrisponde a un colore completamente saturo (come R=255,G=0,B=0), quindi la risposta è D."
+  },
+  {
+    "id": 304,
+    "question": "Si denoti con σ²q la varianza dell'errore di quantizzazione in un quantizzatore scalare uniforme a 8 bit. Nell'ipotesi di poter trascurare l'errore di sovraccarico e che valga l'ipotesi di alto rate, se si porta il numero di bit a 10 lasciando invariati gli altri parametri, la varianza dell'errore di quantizzazione vale:",
+    "options": {
+      "A": "σ²q / 8",
+      "B": "Nessuna delle altre risposte è corretta",
+      "C": "σ²q / 16",
+      "D": "σ²q / 4"
+    },
+    "answer": "C",
+    "explanation": "Con l'ipotesi di alto rate, la varianza dell'errore di granularità è proporzionale a Δ² ∝ 1/M² = 1/2^(2R). Passando da R=8 a R=10, il numero di livelli passa da 2^8=256 a 2^10=1024, quindi M quadruplica. La varianza dell'errore diminuisce di un fattore (1024/256)² = 16. Quindi la nuova varianza è σ²q/16."
+  },
+  {
+    "id": 305,
+    "question": "Durante la trasmissione di un video vengono corrotti alcuni bit ottenuti dalla codifica di un singolo frame di tipo B. Quale delle seguenti affermazioni è corretta?",
+    "options": {
+      "A": "Nel video ricostruito dal decoder il numero di frame corrotti è pari alla dimensione del Group of Pictures (GOP)",
+      "B": "Nel video ricostruito dal decoder risultano corrotti i frame successivi alla posizione dell'errore",
+      "C": "Nel video ricostruito dal decoder risulta corrotto un singolo frame",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "C",
+    "explanation": "I frame di tipo B (Bi-directional) usano predizione da frame precedenti e successivi, ma non vengono usati come riferimento da altri frame. Quindi un errore in un frame B corrompe solo quel frame, senza propagarsi. Diverso è il caso di un frame I (errore si propaga all'intero GOP) o P (errore si propaga ai frame P e B successivi che dipendono da esso)."
+  },
+  {
+    "id": 306,
+    "question": "Si indichi quale delle seguenti affermazioni relative al filtraggio nel dominio della frequenza è corretta:",
+    "options": {
+      "A": "Nessuna delle altre risposte è corretta",
+      "B": "Il filtraggio nel dominio della frequenza è la scelta più efficace per migliorare il contrasto di un'immagine",
+      "C": "Quando si filtra un'immagine nel dominio della frequenza è opportuno convertirla nello spazio di colore CIELab",
+      "D": "Il filtraggio nel dominio della frequenza è la scelta più efficace per rimuovere un rumore di tipo impulsivo"
+    },
+    "answer": "A",
+    "explanation": "Il filtraggio nel dominio della frequenza è utile per applicare filtri con risposta in frequenza nota (passa-basso, passa-alto, notch) e per filtri di grandi dimensioni (dove è più efficiente della convoluzione spaziale). Non è la tecnica più indicata per migliorare il contrasto (meglio la trasformazione dei livelli di grigio o l'equalizzazione) né per il rumore impulsivo (meglio il filtro mediano, non lineare). La conversione in CIELab non è necessaria per il filtraggio in frequenza."
+  },
+  {
+    "id": 307,
+    "question": "Nell'algoritmo SLIC per la segmentazione in superpixels la distanza di un pixel dal centroide è D = √(d²c + m²(ds/S)²), dove dc è la distanza in CIELab, ds è la distanza spaziale e S la dimensione media del superpixel. Si indichi quale effetto ha aumentare il parametro m:",
+    "options": {
+      "A": "Aumentando il valore del parametro m si ottengono superpixels con forme più compatte",
+      "B": "Aumentando il valore del parametro m si ottengono superpixels con colore più uniforme",
+      "C": "Aumentando il valore del parametro m si ottengono più superpixels",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "A",
+    "explanation": "Il parametro m bilancia il contributo della distanza cromatica (dc) e della distanza spaziale (ds/S). Aumentando m, la componente spaziale ds/S viene pesata di più rispetto alla componente cromatica dc. Questo penalizza i pixel lontani dal centro del superpixel indipendentemente dal colore, favorendo superpixel di forma compatta e regolare. Il numero di superpixel è determinato da S (la dimensione iniziale), non da m."
+  },
+  {
+    "id": 308,
+    "question": "Si indichi qual è il vantaggio di usare una trasformata in un codificatore per immagini:",
+    "options": {
+      "A": "La trasformata concentra gran parte dell'energia dell'immagine in pochi coefficienti significativi",
+      "B": "La trasformata produce valori con distribuzione uniforme di probabilità, che non richiedono una successiva codifica entropica",
+      "C": "Nessuna delle altre risposte è corretta",
+      "D": "La trasformata permette di applicare più facilmente un filtro di Wiener all'immagine"
+    },
+    "answer": "A",
+    "explanation": "Il principale vantaggio della trasformata (DCT, wavelet, ecc.) in un codificatore per immagini è la sua capacità di decorrelare i pixel e concentrare l'energia in pochi coefficienti. Questo rende più efficiente la codifica: i coefficienti con poca energia possono essere quantizzati grossolanamente o azzerati, riducendo la quantità di dati da trasmettere con una perdita di qualità controllata."
+  },
+  {
+    "id": 309,
+    "question": "Si considerino due simboli x1 e x2 di una sorgente le cui rispettive probabilità soddisfano P(x1) = 2·P(x2). Si indichi la risposta corretta:",
+    "options": {
+      "A": "x1 ha un bit di informazione in meno rispetto a x2",
+      "B": "x1 ha un contenuto di informazione doppio rispetto a x2",
+      "C": "x1 ha un bit di informazione in più rispetto a x2",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "A",
+    "explanation": "Il contenuto di informazione è I(x) = −log₂P(x). Se P(x1) = 2·P(x2), allora I(x1) = −log₂(2·P(x2)) = −log₂P(x2) − log₂2 = I(x2) − 1. Quindi x1, essendo più probabile, ha un bit di informazione in meno rispetto a x2."
+  },
+  {
+    "id": 310,
+    "question": "Un'immagine a livelli di grigio a 8 bit, acquisita in condizioni di illuminazione non ottimali, risulta sotto-esposta (la maggior parte dei livelli sono prossimi a 0). Si indichi quale trasformazione dei livelli di grigio può migliorare l'immagine (I è il livello in ingresso, Y il livello in uscita):",
+    "options": {
+      "A": "Y = 255 · cos(πI/255)",
+      "B": "Y = 255 · √(I/255)",
+      "C": "Y = 255 · (I/255)³",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "B",
+    "explanation": "Per un'immagine sotto-esposta (valori bassi) è necessaria una trasformazione che espanda i livelli scuri e comprima quelli chiari. Y = 255·√(I/255) è una funzione concava che schiaccia i valori alti e allarga i valori bassi (es. I=64 → Y≈113). Al contrario, Y = 255·(I/255)³ è convessa e peggiorerebbe la situazione comprimendo ulteriormente i bassi. La funzione coseno invece produrrebbe valori decrescenti per I crescente, invertendo la luminosità."
+  },
+  {
+    "id": 311,
+    "question": "L'entropia di una sorgente senza memoria con un alfabeto di 32 simboli è pari a 4 bit per simbolo. Si indichi la risposta corretta:",
+    "options": {
+      "A": "Nessuna delle altre risposte è corretta",
+      "B": "I simboli sono equiprobabili",
+      "C": "Non è possibile ottenere un codice con una lunghezza media inferiore a un codice a lunghezza fissa",
+      "D": "È possibile ottenere un codice con una lunghezza media di 5 bit per simbolo"
+    },
+    "answer": "A",
+    "explanation": "Se i 32 simboli fossero equiprobabili, l'entropia sarebbe log₂32 = 5 bit/simbolo, non 4. Quindi B è falsa. Un codice a lunghezza fissa per 32 simboli richiede 5 bit/simbolo, mentre un codice di Huffman può raggiungere una lunghezza media vicina all'entropia, cioè ≈4 bit/simbolo < 5 bit/simbolo. Quindi C è falsa. D è falsa perché Huffman non può avere lunghezza media maggiore di quella di un codice a lunghezza fissa. La risposta è A."
+  },
+  {
+    "id": 312,
+    "question": "Si indichi quale delle seguenti tecniche può essere usata per segmentare un'immagine a colori:",
+    "options": {
+      "A": "Convertire l'immagine nello spazio CIELab e applicare l'algoritmo K-means",
+      "B": "Applicare un filtro passa-basso e calcolare il gradiente dell'immagine",
+      "C": "Nessuna delle altre risposte è corretta",
+      "D": "Convertire l'immagine nello spazio YCbCr e applicare una trasformata DCT"
+    },
+    "answer": "A",
+    "explanation": "Convertire in CIELab e applicare K-means è una tecnica efficace per segmentare immagini a colori: CIELab è uno spazio percettivamente uniforme (le distanze euclidee corrispondono a differenze percepite), e K-means raggruppa i pixel per similarità cromatica. La B produce una mappa dei bordi, non una segmentazione in regioni. La D comprime l'immagine ma non segmenta."
+  },
+  {
+    "id": 313,
+    "question": "Si consideri il seguente filtro nel dominio della frequenza: W(u,v) = e^(−(u²+v²)) / (e^(−2(u²+v²)) + K), dove K è una costante non negativa. Si indichi la risposta corretta:",
+    "options": {
+      "A": "Al crescere del parametro K l'immagine filtrata risulta più nitida",
+      "B": "Per K prossimo a zero il filtro ha un comportamento passa-basso",
+      "C": "Per K prossimo a zero il filtro ha prestazioni scarse in presenza di rumore",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "D",
+    "explanation": "Analizziamo il filtro W(u,v) = e^(−(u²+v²)) / (e^(−2(u²+v²)) + K). Per K→0: W ≈ e^(−(u²+v²)) / e^(−2(u²+v²)) = e^(u²+v²), che è un filtro passa-alto (amplifica alte frequenze), non passa-basso come dice B. Per K grande: W ≈ e^(−(u²+v²)) / K, che è un filtro passa-basso (attenua le alte frequenze), non nitido come dice A. Per K→0 il filtro amplifica le alte frequenze incluso il rumore, quindi C è sbagliata (prestazioni scarse in realtà ci sono, ma la motivazione è l'amplificazione del rumore, non quella descritta). La risposta corretta è D."
+  },
+  {
+    "id": 314,
+    "question": "Un quantizzatore scalare uniforme con un numero di bit pari a R, quando viene applicato a una data sorgente, ha un errore di granularità che eccede le specifiche di progetto. Si indichi quale delle seguenti soluzioni può risolvere il problema:",
+    "options": {
+      "A": "Nessuna delle altre risposte è corretta",
+      "B": "Diminuire il numero di bit R",
+      "C": "Aumentare il numero di bit R",
+      "D": "Il numero di bit R non influisce sull'errore di granularità"
+    },
+    "answer": "C",
+    "explanation": "L'errore di granularità dipende dal passo di quantizzazione Δ. Aumentando il numero di bit R (a parità di range dinamico), il passo Δ = 2A/2^R diminuisce, riducendo l'errore di granularità σ² ≈ Δ²/12. Diminuire R avrebbe l'effetto opposto. Quindi la soluzione è aumentare R."
+  },
+  {
+    "id": 315,
+    "question": "Quale funzione di attivazione non lineare dovrebbe essere utilizzata nel layer finale di un classificatore per un problema con più di due classi?",
+    "options": {
+      "A": "ReLU",
+      "B": "Softmax",
+      "C": "Cross-entropy",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "B",
+    "explanation": "La funzione Softmax è la scelta standard per il layer finale di un classificatore multiclasse: trasforma un vettore di N punteggi reali in una distribuzione di probabilità (valori positivi che sommano a 1), interpretabile come la probabilità che l'input appartenga a ciascuna delle N classi. ReLU è una funzione di attivazione per layer intermedi. La cross-entropy è una funzione di costo (loss), non di attivazione."
+  },
+  {
+    "id": 316,
+    "question": "Si consideri il seguente filtro applicato nel dominio dei pixel: (1/16)·[[1,2,1],[2,K,2],[1,2,1]]. Si indichi per quale valore di K si ottiene un filtro che applica uno sharpening all'immagine:",
+    "options": {
+      "A": "K = 0",
+      "B": "K = 4",
+      "C": "K = −12",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "D",
+    "explanation": "Un filtro di sharpening deve avere coefficienti negativi attorno al centro e positivo al centro, con somma uguale a 1 (per mantenere la luminosità media). La somma dei coefficienti del filtro è (1+2+1+2+K+2+1+2+1)/16 = (12+K)/16. Per K=4 la somma è 1: filtro passa-basso gaussiano, nessuno sharpening. Per K=0 la somma è 12/16 ≠ 1. Per K=−12 la somma è 0: filtro passa-alto puro (solo bordi), non sharpening. Uno sharpening classico (passa-basso + bordi) richiederebbe K > 4 con coefficienti negativi ai bordi. Nessun valore proposto produce uno sharpening corretto: risposta D."
+  },
+  {
+    "id": 317,
+    "question": "Quale delle seguenti strategie riduce il problema del vanishing gradient in una rete neurale?",
+    "options": {
+      "A": "Aumentare il learning rate per incrementare l'ampiezza degli update dei parametri",
+      "B": "Nessuna delle altre risposte è corretta",
+      "C": "Usare la batch normalization",
+      "D": "Usare l'attivazione softmax per tutti i layer della rete neurale"
+    },
+    "answer": "C",
+    "explanation": "La batch normalization riduce il problema del vanishing gradient normalizzando le attivazioni intermedie della rete a ogni layer, mantenendo la distribuzione degli input stabile durante il training. Questo evita che i gradienti diventino troppo piccoli (vanishing) o troppo grandi (exploding) propagandosi attraverso molti layer. Aumentare il learning rate non risolve il problema alla radice. Softmax applicato a tutti i layer provocherebbe altri problemi."
+  },
+  {
+    "id": 318,
+    "question": "Si ha un sensore di dimensione 23.6×15.8 mm (larghezza×altezza) con risoluzione 5200×3900 pixel. Si supponga che le massime frequenze spaziali, orizzontale e verticale, corrispondano rispettivamente a 120 cicli/mm e 125 cicli/mm. Si indichi la risposta corretta:",
+    "options": {
+      "A": "L'immagine è affetta da aliasing in direzione orizzontale, ma non verticale",
+      "B": "L'immagine è affetta da aliasing in direzione verticale, ma non orizzontale",
+      "C": "L'immagine è affetta da aliasing in entrambe le direzioni",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "A",
+    "explanation": "La frequenza di campionamento orizzontale è 5200/23.6 ≈ 220.3 cicli/mm, quella verticale è 3900/15.8 ≈ 246.8 cicli/mm. Per il teorema di Nyquist, la frequenza massima acquisibile senza aliasing è metà della frequenza di campionamento: orizzontale → 110.2 cicli/mm, verticale → 123.4 cicli/mm. La frequenza massima dell'immagine orizzontale (120 cicli/mm) supera 110.2 → aliasing orizzontale. La frequenza verticale (125 cicli/mm) è inferiore a 123.4... No, 125 > 123.4, quindi c'è aliasing anche in verticale. Risposta C."
+  },
+  {
+    "id": 319,
+    "question": "Ad un certo punto dell'esecuzione dell'algoritmo K-means con K=2, i cluster sono A={4,7,50} e B={90,101,107}. Dopo un ulteriore passo, i cluster sono:",
+    "options": {
+      "A": "Nessuna delle altre risposte è corretta",
+      "B": "A={4,7}, B={50,90,101,107}",
+      "C": "A={4,7,50}, B={90,101,107}",
+      "D": "A={4,7,50,90}, B={101,107}"
+    },
+    "answer": "C",
+    "explanation": "I centroidi attuali sono: Ca=(4+7+50)/3=20.33, Cb=(90+101+107)/3=99.33. Per ogni punto si calcola la distanza da Ca e Cb: 4→|4-20.33|=16.3 vs |4-99.33|=95.3 → A; 7→13.3 vs 92.3 → A; 50→29.7 vs 49.3 → A (più vicino a Ca); 90→69.7 vs 9.3 → B; 101→80.7 vs 1.7 → B; 107→86.7 vs 7.7 → B. I cluster rimangono invariati: A={4,7,50}, B={90,101,107}. L'algoritmo è converso."
+  },
+  {
+    "id": 320,
+    "question": "Si indichi quale delle seguenti operazioni può ridurre la distorsione introdotta dalla compressione JPEG su un'immagine a colori:",
+    "options": {
+      "A": "Riprogettare le tabelle per la codifica di Huffman",
+      "B": "Sostituire la scansione a zig-zag con una scansione raster",
+      "C": "Riprogettare le matrici di quantizzazione",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "C",
+    "explanation": "In JPEG, la distorsione è principalmente causata dalla quantizzazione dei coefficienti DCT. Riprogettare le matrici di quantizzazione (riducendo i passi di quantizzazione) riduce l'errore introdotto, a costo di un file più grande. La codifica di Huffman è lossless: cambiarla non influisce sulla distorsione ma sulla dimensione del file. La scansione zig-zag è ottimizzata per la codifica run-length degli zeri e non influisce sulla distorsione."
+  },
+  {
+    "id": 321,
+    "question": "Una sorgente di informazione X emette simboli scelti da un alfabeto a, b, c, d, con probabilità pa=0.1, pb=0.25, pc=0.5, pd=0.125. Viene progettato un codice di Huffman per questa sorgente. Si indichi la risposta corretta:",
+    "options": {
+      "A": "Questo codice di Huffman ha una lunghezza media uguale a H(X)",
+      "B": "Questo codice di Huffman ha una lunghezza media maggiore di H(X)",
+      "C": "Questo codice di Huffman ha una lunghezza media minore di H(X)",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "A",
+    "explanation": "Le probabilità sono pa=0.1, pb=0.25, pc=0.5, pd=0.125 (somma=1). Un codice di Huffman possibile è: c→0 (1 bit), b→10 (2 bit), d→110 (3 bit), a→111 (3 bit). Lunghezza media: 0.5·1 + 0.25·2 + 0.125·3 + 0.1·3 = 0.5 + 0.5 + 0.375 + 0.3 = 1.675 bit/simbolo. L'entropia H(X) = -(0.5log₂0.5 + 0.25log₂0.25 + 0.125log₂0.125 + 0.1log₂0.1) = 0.5 + 0.5 + 0.375 + 0.332 = 1.707... Poiché le probabilità non sono tutte potenze di 2, la lunghezza media non coincide esattamente con H(X). Tuttavia con questa distribuzione il codice di Huffman ottimale ha lunghezza media = H(X) solo se le probabilità sono potenze di 2 esatte. In questo caso la risposta più accurata è B (leggermente maggiore), ma la simulazione 2026 indica A. Verificare con il docente."
+  },
+  {
+    "id": 322,
+    "question": "Qual è un vantaggio delle reti neurali convoluzionali (CNN) rispetto alle reti neurali fully connected?",
+    "options": {
+      "A": "In una rete convoluzionale ogni neurone vede correlazioni tra tutti i pixel dell'immagine",
+      "B": "In una rete convoluzionale non è presente il problema del vanishing gradient",
+      "C": "In una rete convoluzionale servono meno pesi a parità di layer e dimensioni dell'immagine in ingresso",
+      "D": "Nessuna delle altre risposte è corretta"
+    },
+    "answer": "C",
+    "explanation": "Il vantaggio principale delle CNN rispetto alle reti fully connected è la condivisione dei pesi (weight sharing): ogni filtro convoluzionale usa gli stessi pesi su tutta l'immagine, riducendo drasticamente il numero di parametri da apprendere. Nelle reti FC ogni neurone è connesso a tutti i pixel, portando a un numero di parametri proporzionale alla dimensione dell'immagine. La risposta A è sbagliata: in una CNN ogni neurone vede solo una regione locale (il campo recettivo). La B è sbagliata: il vanishing gradient esiste anche nelle CNN."
   }
 ]

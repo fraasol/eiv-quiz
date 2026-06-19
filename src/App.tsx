@@ -22,31 +22,30 @@ export default function App() {
   const [mode, setMode] = useState<Mode>('exam');
   const [questions, setQuestions] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
-  const [records, setRecords] = useState<AnswerRecord[]>([]);
+  const [answers, setAnswers] = useState<Record<number, AnswerKey>>({});
 
   const handleStart = useCallback((n: number, m: Mode) => {
     const picked = shuffle(allQuestions as Question[]).slice(0, n);
     setQuestions(picked);
     setMode(m);
     setIndex(0);
-    setRecords([]);
+    setAnswers({});
     setScreen('quiz');
   }, []);
 
   const handleAnswer = useCallback((given: AnswerKey) => {
-    const q = questions[index];
-    const skipped = given === 'SKIP';
-    const correct = !skipped && given === q.answer;
-    const record: AnswerRecord = { question: q, given, correct, skipped };
-    const newRecords = [...records, record];
-    setRecords(newRecords);
-
+    const newAnswers = { ...answers, [index]: given };
+    setAnswers(newAnswers);
     if (index + 1 >= questions.length) {
       setScreen('results');
     } else {
       setIndex(index + 1);
     }
-  }, [questions, index, records]);
+  }, [index, questions.length, answers]);
+
+  const handleNavigate = useCallback((to: number) => {
+    setIndex(to);
+  }, []);
 
   const handleStop = useCallback(() => {
     setScreen('results');
@@ -56,45 +55,52 @@ export default function App() {
     setScreen('setup');
   }, []);
 
-  const correctCount  = records.filter(r => r.correct).length;
-  const wrongCount    = records.filter(r => !r.correct && !r.skipped).length;
-  const skippedCount  = records.filter(r => r.skipped).length;
-  const score         = computeScore(correctCount, wrongCount, questions.length || EXAM_QUESTIONS);
+  const allRecords: AnswerRecord[] = questions.map((q, i) => {
+    const given: AnswerKey = answers[i] ?? 'SKIP';
+    const skipped = answers[i] === undefined || answers[i] === 'SKIP';
+    const correct = !skipped && given === q.answer;
+    return { question: q, given, correct, skipped };
+  });
+
+  const correctCount = allRecords.filter(r => r.correct).length;
+  const wrongCount = allRecords.filter(r => !r.correct && !r.skipped).length;
+  const skippedCount = allRecords.filter(r => r.skipped).length;
+  const score = computeScore(correctCount, wrongCount, questions.length || EXAM_QUESTIONS);
 
   return (
-    <div className="app">
-      {screen === 'setup' && (
-        <Setup
-          totalAvailable={(allQuestions as Question[]).length}
-          defaultN={EXAM_QUESTIONS}
-          onStart={handleStart}
-        />
-      )}
-      {screen === 'quiz' && (
-        <Quiz
-          question={questions[index]}
-          index={index}
-          total={questions.length}
-          mode={mode}
-          correctSoFar={correctCount}
-          wrongSoFar={wrongCount}
-          onAnswer={handleAnswer}
-          onStop={handleStop}
-        />
-      )}
-      {screen === 'results' && (
-        <Results
-          records={records}
-          total={questions.length}
-          correct={correctCount}
-          wrong={wrongCount}
-          skipped={skippedCount}
-          score={score}
-          passThreshold={PASS_THRESHOLD}
-          maxScore={MAX_SCORE}
-          onRestart={handleRestart}
-        />
-      )}
-    </div>
+      <div className="app">
+        {screen === 'setup' && (
+            <Setup
+                totalAvailable={(allQuestions as Question[]).length}
+                defaultN={EXAM_QUESTIONS}
+                onStart={handleStart}
+            />
+        )}
+        {screen === 'quiz' && (
+            <Quiz
+                questions={questions}
+                index={index}
+                total={questions.length}
+                mode={mode}
+                answers={answers}
+                onAnswer={handleAnswer}
+                onNavigate={handleNavigate}
+                onStop={handleStop}
+            />
+        )}
+        {screen === 'results' && (
+            <Results
+                records={allRecords}
+                total={questions.length}
+                correct={correctCount}
+                wrong={wrongCount}
+                skipped={skippedCount}
+                score={score}
+                passThreshold={PASS_THRESHOLD}
+                maxScore={MAX_SCORE}
+                onRestart={handleRestart}
+            />
+        )}
+      </div>
   );
 }
